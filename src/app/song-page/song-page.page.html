@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar mode="ios" color="primary"> 
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">{{songBook}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-no-padding" appSwipe
+(swipeLeft)="onSwipeLeft($event)"
+(swipeRight)="onSwipeRight($event)">
+  <ion-toolbar class="tool-bars"> 
+    <div class="st-toolBar">
+      <div class="arrow-left">
+      <ion-icon class="st-iconOnly" slot="icon-only" color="primary" name="arrow-back-outline" (click)="previousSong(song)"></ion-icon>
+      </div>
+      <div class="arrow-right">
+        <ion-icon class="st-iconOnly" slot="icon-only"  fill="clear" color="primary" name="arrow-forward-outline" (click)="nextSong(song)" ></ion-icon>
+      </div>
+    </div>
+ </ion-toolbar>
+ 
+      <ion-list #slide lines="none" class="song-lists" mode="md">
+          <ion-list-header class="st-songMain">
+              <ion-label color="light"  class="item-left st-no" [style.font-size]="fontSize+'px'" [style.line-height]="lineHeight+'px'">{{song.song_no}}</ion-label>
+              <ion-label color="danger"  class="item-right st-title" [style.font-size]="fontSize+'px'" [style.line-height]="lineHeight+'px'">{{song.album_name}}</ion-label>
+          </ion-list-header>
+          <ion-item class="title" text-wrap  inset>
+            <div class="st-songData">
+              <h5 *ngFor="let tl of song.title" [style.font-size]="fontSize+'px'" [style.line-height]="lineHeight+'px'">{{tl}}</h5>
+            </div>
+          </ion-item>
+          <ion-item class="title" text-wrap *ngIf="song.sub_title.length!=0">
+            <div class="st-songData">
+              <h4 [style.font-size]="fontSize+'px'" [style.line-height]="lineHeight+'px'">అ.ప. : </h4>
+              <h4 class="subtitleLine" [style.font-size]="fontSize+'px'" [style.line-height]="lineHeight+'px'" text-wrap *ngFor="let stl of song.sub_title">
+              {{stl}}
+              </h4>
+            </div>
+          </ion-item>
+      </ion-list>
+          <ol class="conterup st-listItem">
+            <li class="discription " *ngFor="let pal of song.pallavi" class="text-wrap">
+            <p *ngFor="let line of pal.lines" [style.font-size]="fontSize+'px'" [style.line-height]="lineHeight+'px'">
+                {{line}}
+            </p>
+            </li>
+          </ol>
+     <div class="song_writter">
+       <p [style.font-size]="fontSize+'px'" [style.line-height]="lineHeight+'px'">{{song.writer}}</p>
+       </div> 
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="increaseFontSize()" color="success">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button (click)="setFavourite(song)">
+    <ion-icon name="{{isFav==true? 'heart' : 'heart-outline'}}"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-fab vertical="bottom" horizontal="start" slot="fixed">
+  <ion-fab-button (click)="decreaseFontSize()" color="light">
+    <ion-icon name="remove"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+</ion-content>

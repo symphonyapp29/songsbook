@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="ios" color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">Favourite Children Songs</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="st-mainWrapper">
+  <ion-list>
+    <ion-item >
+      <div class="st-mainWrapper">
+        <div class="st-nNo">S.No</div>
+        <div class="st-title">Song Title</div>
+        <div class="st-Number">Song No.</div>
+      </div>
+  </ion-item>
+    <ion-item *ngFor="let item of items;let i = index;" (click)="selectedSong(item)" inset>
+        <div class="st-mainWrapper">
+          <div class="st-sno">{{i+1}}.</div>
+          <div class="st-content">{{ item.song_title_index }}</div>
+          <div class="st-count">{{item.song_no}}</div>
+        </div>
+    </ion-item>
+</ion-list> 
+</ion-content>

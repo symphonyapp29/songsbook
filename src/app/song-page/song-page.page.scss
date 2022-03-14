@@ -1,0 +1,109 @@
+ion-slides {
+    height: 100%;
+}
+
+.swiper-slide {
+    display: block;
+}
+
+
+ion-title {
+    font-family: 'Fredoka One' !important;
+    font-size: 18px;
+    font-weight: 100;
+}
+.title {
+    color: #fee133;
+    margin-bottom: -14px;
+    
+}
+
+.st-songMain{
+    .st-no{
+      font-size: 16px;
+      font-weight: 500;
+      text-align: left;        
+      font-family: "ramabhadraregular";
+    }
+    .st-title{
+      font-size: 15px;
+      font-weight: 600;
+      text-align: right;
+      padding-right: 15px;      
+      font-family: "ramabhadraregular";
+    }
+}
+
+.st-songData{
+    h5 {
+        font-size: 16px;
+        line-height: 20px;
+        text-align: left;
+        color: #fee133;
+        font-family: "ramabhadraregular";
+        margin: 10px 0px;
+    }
+
+    h4 {
+        font-size: 16px;
+        line-height: 20px;
+        text-align: left;
+        color: #ffffff;
+        font-family: "ramabhadraregular";
+        margin: 0px 0px 10px;
+    }
+}
+
+.st-listItem{
+    padding: 0px 30px;
+    color: #FFFFFF;
+    li{
+        p{
+            font-size: 16px;
+            line-height: 20px;
+            color: #FFFFFF;
+            text-align: left;
+            margin: 0;
+            font-family: "ramabhadraregular";
+        }
+    }
+}
+
+.song_writter{
+    p{
+        font-size:14px;
+        font-family: "ramabhadraregular";
+        color:var(--ion-color-danger);
+        line-height:16px;
+        font-weight: 700;
+        text-align: right;
+        padding-right:15px;
+    }
+}
+
+.tool-bars{
+    height: 35px;
+
+.st-toolBar{
+    padding:0px;
+    clear:both;
+  .arrow-left{
+   float:left;
+   font-size: 24px;
+   padding-left:15px;
+  }
+  .arrow-right{
+      float:right;
+      font-size: 24px;
+      padding-right:15px;
+   }
+ }
+}
+
+.song-lists{
+    margin-top:-10px;
+}
+
+
+ 
+ 

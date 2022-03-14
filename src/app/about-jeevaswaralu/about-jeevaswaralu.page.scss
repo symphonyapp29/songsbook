@@ -1,0 +1,30 @@
+ion-title {
+    font-family: 'Fredoka One' !important;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+p {
+    color: #fff !important;
+}
+img.img-div {
+    width: 100%;
+    height: 50%;
+}
+ion-card {
+    position: relative;
+    text-align: center;
+    margin: 1px !important;
+    width: 100% !important;
+    padding-right: 2px !important;
+    h5{
+        color: #fff !important;
+    }
+}
+ion-card img {
+    width: 100%;
+    max-height: 250px;
+}
+p.justify {
+    text-align: justify;
+}

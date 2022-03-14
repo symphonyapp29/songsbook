@@ -1,0 +1,132 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+ion-content {
+    // --background: #ffc409 !important;
+    --background: linear-gradient(-180deg,  #FFB00D,#f76406);
+}
+ion-list {
+    --background: #ffffff !important;
+}
+ion-item {
+    --background: #ffffff !important;
+    // padding:20px;
+    text-transform: uppercase;
+    font-family: 'Fredoka One' !important;
+}
+ion-grid {
+    --ion-grid-padding:20px;
+} 
+
+.ion-card-blue {
+    background: #ffffff;
+    border: 1px solid #f76406;
+    color:#f76406;
+    padding:20px;
+    font-weight: 100;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 5px;
+    font-family: 'Fredoka One' !important;
+    box-shadow: -2px 10px 22px -16px rgba(0,0,0,.75);
+}
+
+section {
+    text-align:center;
+}
+
+.ion-card-white {
+    background-color:#ffffff;
+    color:#000000;
+    padding:20px;
+    font-weight: 100;
+    text-align: left;
+    text-transform: uppercase;
+    margin: 5px;
+    font-family: 'Fredoka One' !important;
+}
+
+.ion-card-yellow {
+    background-color:#ffc409;
+    color:white;
+    padding:20px;
+    font-weight: 100;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 5px;
+    font-family: 'Fredoka One' !important;
+    box-shadow: -2px 10px 22px -16px rgba(0,0,0,.75);
+}
+.ion-card-orange {
+    background-color:#f53d3d;
+    color:white;
+    padding:20px;
+    font-weight: 100;
+    text-align: left;
+    text-transform: uppercase;
+    margin: 5px;
+    font-family: 'Fredoka One' !important;
+}
+
+.ion-card-green {
+    background-color:#acddde;
+    color:white;
+    padding:20px;
+    font-weight: 100;
+    text-align: left;
+    text-transform: uppercase;
+    margin: 5px;
+    font-family: 'Fredoka One' !important;
+}
+
+.ion-card-indigo {
+    background-color:#4B0082;
+    color:white;
+    font-weight: 100;
+    padding:20px;
+    text-align: left;
+    text-transform: uppercase;
+    margin: 5px;
+    font-family: 'Fredoka One' !important;
+}
+
+.ion-card-magenta {
+    background-color:#8B008B;
+    color:white;
+    font-weight: 100;
+    padding:20px;
+    text-align: left;
+    text-transform: uppercase;
+    margin: 5px;
+    font-family: 'Fredoka One' !important;
+}
+
+.ion-card-darkblue {
+    background-color:#0f4b81;
+    color:white;
+    padding:20px;
+    font-weight: 100;
+    text-align: left;
+    text-transform: uppercase;
+    margin: 5px;
+    font-family: 'Fredoka One' !important;
+}
+
+ion-title {
+    font-weight: 100;
+}
+
+.head-card {
+    padding: 20px;
+    background: linear-gradient(-180deg, #f76406, #ffc409);
+    text-align: center;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+ion-icon {
+    font-size: 3em;
+}
+

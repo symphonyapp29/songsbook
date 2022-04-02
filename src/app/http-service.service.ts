@@ -162,8 +162,8 @@ export class HttpServiceService {
     async loaderchildrenSongsStart() {
       this.loading = await this.loadingCtrl.create({
         message: 'Children Songs Loading from Server...',
-        duration: 9000,
-        cssClass:"custom-loading"
+        duration: 9000
+        // cssClass:"custom-loading"
       });
       await this.loading.present();
     }

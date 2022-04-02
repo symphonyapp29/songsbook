@@ -88,45 +88,78 @@ export class MembershipPage implements OnInit {
 			}
 			
 			self.httpService.loaderStart();
-			
-			self.http.post(self.serviceName.new_registration_social_login, param, {})
-			.then(data1 => {
-				self.httpService.loaderStop();
-				let data:any= JSON.parse(data1.data);
-				// alert(JSON.stringify(data));
-				// alert(JSON.stringify(data[1]));
-				// alert(data[0].data[1].response.message);
-				if(data[0].data.length>0 && data[0].data[0].id && data[0].data[0].id!=null){
-					self.httpService.setter(self.serviceName.userProfile,JSON.stringify(data[0].data[0]));
-					this.isPayment = data[0].data[0].payment_status;
-					if(data[0].data[0].payment_status==1){
+
+			self.httpService.httpServicePost(self.serviceName.registration_social_login,param).subscribe(
+				data=>{
+					self.httpService.loaderStop();
+					if(data[0].data.length>0 && data[0].data[0].id && data[0].data[0].id!=null){
+						self.httpService.setter(self.serviceName.userProfile,JSON.stringify(data[0].data[0]));
+						this.isPayment = data[0].data[0].payment_status;
+						if(data[0].data[0].payment_status==1){
+							
+							localStorage.setItem("mainSongBook",JSON.stringify([]));
+							localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
+							localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
+							localStorage.setItem("childrenSongBook",JSON.stringify([]));
+							localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
+							localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
+						}else{
+							localStorage.setItem("mainSongBook",JSON.stringify([]));
+							localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
+							localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
+							localStorage.setItem("childrenSongBook",JSON.stringify([]));
+							localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
+							localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
+						}
 						
-						localStorage.setItem("mainSongBook",JSON.stringify([]));
-						localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
-						localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
-						localStorage.setItem("childrenSongBook",JSON.stringify([]));
-						localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
-						localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
-					}else{
-						localStorage.setItem("mainSongBook",JSON.stringify([]));
-						localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
-						localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
-						localStorage.setItem("childrenSongBook",JSON.stringify([]));
-						localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
-						localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
+						self.httpService.showToast(data[1].response.message);
+						this.updateSongs();
 					}
+				},
+			error => {
+				this.httpService.loaderStop();
+				this.httpService.showToast("Data loading error");
+        
+				});
+			
+			// self.http.post(self.serviceName.new_registration_social_login, param, {})
+			// .then(data1 => {
+			// 	self.httpService.loaderStop();
+			// 	let data:any= JSON.parse(data1.data);
+			// 	// alert(JSON.stringify(data));
+			// 	// alert(JSON.stringify(data[1]));
+			// 	// alert(data[0].data[1].response.message);
+			// 	if(data[0].data.length>0 && data[0].data[0].id && data[0].data[0].id!=null){
+			// 		self.httpService.setter(self.serviceName.userProfile,JSON.stringify(data[0].data[0]));
+			// 		this.isPayment = data[0].data[0].payment_status;
+			// 		if(data[0].data[0].payment_status==1){
+						
+			// 			localStorage.setItem("mainSongBook",JSON.stringify([]));
+			// 			localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
+			// 			localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
+			// 			localStorage.setItem("childrenSongBook",JSON.stringify([]));
+			// 			localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
+			// 			localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
+			// 		}else{
+			// 			localStorage.setItem("mainSongBook",JSON.stringify([]));
+			// 			localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
+			// 			localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
+			// 			localStorage.setItem("childrenSongBook",JSON.stringify([]));
+			// 			localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
+			// 			localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
+			// 		}
 					
-					self.httpService.showToast(data[1].response.message);
-					this.updateSongs();
-				}
+			// 		self.httpService.showToast(data[1].response.message);
+			// 		this.updateSongs();
+			// 	}
 				
 			
-			})
-			.catch(error => {
-			this.httpService.loaderStop();
-				console.log(error.error); // error message as string
-				console.log(error.headers);
-			});
+			// })
+			// .catch(error => {
+			// this.httpService.loaderStop();
+			// 	console.log(error.error); // error message as string
+			// 	console.log(error.headers);
+			// });
 			
 		},err =>{
 			this.httpService.loaderStop();
@@ -146,7 +179,7 @@ export class MembershipPage implements OnInit {
       //key: "rzp_test_SxgKz6rtaSGq2m", // your Key Id from Razorpay dashboard
       amount: 20000, // Payment amount in smallest denomiation e.g. cents for USD
 	  name: 'Jeevaswaralu Full Songs',
-	  order_id:"order_DBJOWzybf0sJbb",
+	//   order_id:"order_DBJOWzybf0sJbb",
       prefill: {
         email: self.httpService.userType('email'),
         contact: '',
@@ -172,37 +205,37 @@ export class MembershipPage implements OnInit {
 			device_id: self.httpService.userType('device_id'),
 			total_cost:200
 		}
-		
+		// this.httpService.loaderchildrenSongsStart();	
 	   self.httpService.loaderStart();
-	   self.http.post(self.serviceName.razor_payment_update, params, {})
-			.then(data1 => {
-				self.httpService.loaderStop();
-				let data:any= JSON.parse(data1.data);
-				
-				if(data[0].data.length>0 && data[0].data[0].id && data[0].data[0].id!=null){
-					self.httpService.setter(self.serviceName.userProfile,JSON.stringify(data[0].data[0]));
-					self.isPayment = data[0].data[0].payment_status;
-					if(data[0].data[0].payment_status==1){
-						localStorage.setItem("mainSongBook",JSON.stringify([]));
-						localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
-						localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
-						localStorage.setItem("childrenSongBook",JSON.stringify([]));
-						localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
-						localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
-					}else{
-						localStorage.setItem("mainSongBook",JSON.stringify([]));
-						localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
-						localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
-						localStorage.setItem("childrenSongBook",JSON.stringify([]));
-						localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
-						localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
-					}
-					self.httpService.showToast(data[1].response.message);
-					this.updateSongs();
+
+	   self.httpService.httpServicePost(self.serviceName.razor_payment_update, params).subscribe(
+		data1=>{
+			self.httpService.loaderStop();
+			// let data:any= JSON.parse(data1.data);
+			var data = data1;
+			if(data[0].data.length>0 && data[0].data[0].id && data[0].data[0].id!=null){
+				self.httpService.setter(self.serviceName.userProfile,JSON.stringify(data[0].data[0]));
+				self.isPayment = data[0].data[0].payment_status;
+				if(data[0].data[0].payment_status==1){
+					localStorage.setItem("mainSongBook",JSON.stringify([]));
+					localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
+					localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
+					localStorage.setItem("childrenSongBook",JSON.stringify([]));
+					localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
+					localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
+				}else{
+					localStorage.setItem("mainSongBook",JSON.stringify([]));
+					localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
+					localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
+					localStorage.setItem("childrenSongBook",JSON.stringify([]));
+					localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
+					localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
 				}
-			
-			})
-			.catch(error => {
+				self.httpService.showToast(data[1].response.message);
+				this.updateSongs();
+			}
+		},
+        error => {
 				self.httpService.loaderStop();
 				localStorage.setItem("mainSongBook",JSON.stringify([]));
 				localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
@@ -210,7 +243,44 @@ export class MembershipPage implements OnInit {
 				localStorage.setItem("childrenSongBook",JSON.stringify([]));
 				localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
 				localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
-			});
+        });
+	//    self.http.post(self.serviceName.razor_payment_update, params, {})
+	// 		.then(data1 => {
+	// 			self.httpService.loaderStop();
+	// 			let data:any= JSON.parse(data1.data);
+				
+	// 			if(data[0].data.length>0 && data[0].data[0].id && data[0].data[0].id!=null){
+	// 				self.httpService.setter(self.serviceName.userProfile,JSON.stringify(data[0].data[0]));
+	// 				self.isPayment = data[0].data[0].payment_status;
+	// 				if(data[0].data[0].payment_status==1){
+	// 					localStorage.setItem("mainSongBook",JSON.stringify([]));
+	// 					localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
+	// 					localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
+	// 					localStorage.setItem("childrenSongBook",JSON.stringify([]));
+	// 					localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
+	// 					localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
+	// 				}else{
+	// 					localStorage.setItem("mainSongBook",JSON.stringify([]));
+	// 					localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
+	// 					localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
+	// 					localStorage.setItem("childrenSongBook",JSON.stringify([]));
+	// 					localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
+	// 					localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
+	// 				}
+	// 				self.httpService.showToast(data[1].response.message);
+	// 				this.updateSongs();
+	// 			}
+			
+	// 		})
+	// 		.catch(error => {
+	// 			self.httpService.loaderStop();
+	// 			localStorage.setItem("mainSongBook",JSON.stringify([]));
+	// 			localStorage.setItem("mainSongBookOrginalData",JSON.stringify([]));
+	// 			localStorage.setItem("mainSongBookSortedData",JSON.stringify([]));
+	// 			localStorage.setItem("childrenSongBook",JSON.stringify([]));
+	// 			localStorage.setItem("childrenSongBookSortedData",JSON.stringify([]));
+	// 			localStorage.setItem("childrenSongBookOrginalData",JSON.stringify([]));
+	// 		});
     };
 
     var cancelCallback = function (error) {
